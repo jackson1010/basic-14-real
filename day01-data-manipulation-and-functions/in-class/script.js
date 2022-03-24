@@ -29,11 +29,16 @@ var calculateTotalFuelCost = function (tripLengthInMiles) {
 
 var roadTripCostComfortableMain = function (input) {
   // Complete the Comfortable: Road Trip Cost exercise below with roadTripCostComfortableMain as the main function.
-  var totalCost = calculateTotalFuelCostForComfortable(
+  var totalCostTrain = calculateTotalFuelCostForComfortable(
     convertKmtoMiles(input),
     2
   );
-  return totalCost;
+  var totalCostCar = calculateTotalFuelCostForComfortable(
+    convertKmtoMiles(input),
+    2.2
+  );
+  var DiffCost = totalCostCar - totalCostTrain;
+  return DiffCost;
 };
 
 var calculateTotalFuelCostForComfortable = function (
@@ -57,7 +62,7 @@ var noOfCubes = function (input) {
 };
 
 var weightOfIceInPound = function (input) {
-  var weightOfIceInPound = input * 1.5 * 0.00220462;
+  var weightOfIceInPound = (input * 1.5 * 1) / 454;
   return weightOfIceInPound;
 };
 
@@ -68,12 +73,12 @@ var timeRequired = function (input) {
 
 var beerOrderMain = function (input) {
   // Complete the More Comfortable: Beer Order exercise below with beerOrderMain as the main function.
-  var myOutputValue = noOfPints(noOfHalfBK(input)) * 2;
+  var myOutputValue = noOfPintsPerQuater(noOfHalfBK(input));
   return myOutputValue;
 };
 
-var noOfPints = function (input) {
-  var noOfPints = input * 2;
+var noOfPintsPerQuater = function (input) {
+  var noOfPints = (input * 2 * 52 * 7) / 4;
   return noOfPints;
 };
 
