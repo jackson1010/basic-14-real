@@ -4,14 +4,20 @@ var main = function (input) {
   if (
     input.toLowerCase() !== "scissors" &&
     input.toLowerCase() !== "paper" &&
-    input.toLowerCase() !== "stone"
+    input.toLowerCase() !== "stone" &&
+    input.toLowerCase() !== "reversed scissors" &&
+    input.toLowerCase() !== "reversed paper" &&
+    input.toLowerCase() !== "reversed stone"
   ) {
     return 'Please input 1 of "scissors", "paper", or "stone" to play the game.';
   }
   if (
     (input.toLowerCase() === "scissors" && result === "paper") ||
     (input.toLowerCase() === "stone" && result === "scissors") ||
-    (input.toLowerCase() === "paper" && result === "stone")
+    (input.toLowerCase() === "paper" && result === "stone") ||
+    (input.toLowerCase() === "reversed scissors" && result === "stone") ||
+    (input.toLowerCase() === "reversed stone" && result === "paper") ||
+    (input.toLowerCase() === "reversed paper" && result === "scissors")
   ) {
     return (
       defaultMsg +
@@ -24,7 +30,10 @@ var main = function (input) {
   if (
     (input.toLowerCase() === "scissors" && result === "stone") ||
     (input.toLowerCase() === "stone" && result === "paper") ||
-    (input.toLowerCase() === "paper" && result === "scissors ")
+    (input.toLowerCase() === "paper" && result === "scissors") ||
+    (input.toLowerCase() === "reversed scissors" && result === "paper") ||
+    (input.toLowerCase() === "reversed stone" && result === "scissors") ||
+    (input.toLowerCase() === "reversed paper" && result === "stone")
   ) {
     return (
       defaultMsg +
@@ -64,20 +73,20 @@ var generatedIcon = function (generated) {
 };
 
 var inputIcon = function (input) {
-  if (input === "scissors") return " ✂️";
-  if (input === "paper") return " 🗒";
-  if (input === "stone") return " 🪨";
+  if (input === "scissors" || input === "reversed scissors") return " ✂️";
+  if (input === "paper" || input === "reversed paper") return " 🗒";
+  if (input === "stone" || input === "reversed stone") return " 🪨";
 };
 
 var msg = function (input, result) {
-  var gIcon = generatedIcon(input);
-  var uIcon = inputIcon(result);
+  var gIcon = generatedIcon(result);
+  var uIcon = inputIcon(input);
   return (
-    `The computer chose` +
+    `The computer chose ` +
     result +
     gIcon +
     "<br><br>" +
-    "You chose " +
+    `You chose ` +
     input +
     uIcon
   );
